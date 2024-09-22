@@ -19,6 +19,30 @@ public class Node <D extends Comparable<D>> implements AbstractNode , Comparable
         return data;
     }
 
+    public Boolean isGreaterThan(Node<D> node) {
+        return this.compareTo(node) > 0;
+    }
+
+    public Boolean isLessThan(Node<D> node) {
+        return this.compareTo(node) < 0;
+    }
+
+    public Boolean isEqualTo(Node<D> node) {
+        return this.compareTo(node) == 0;
+    }
+
+    public Boolean isGreaterThanOrEqualTo(Node<D> node) {
+        return this.compareTo(node) >= 0;
+    }
+
+    public Boolean isLessThanOrEqualTo(Node<D> node) {
+        return this.compareTo(node) <= 0;
+    }
+
+    public Boolean isNotEqualTo(Node<D> node) {
+        return this.compareTo(node) != 0;
+    }
+
     public Boolean isLeaf() {
         return left.isNil() && right.isNil();
     }
