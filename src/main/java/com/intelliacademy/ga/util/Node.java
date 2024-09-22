@@ -5,7 +5,7 @@ interface AbstractNode{
 }
 
 public class Node <D extends Comparable<D>> implements AbstractNode , Comparable<Node<D>>{
-    private final D data;
+    private D data;
     private Node<D> left;
     private Node<D> right;
 
@@ -17,6 +17,33 @@ public class Node <D extends Comparable<D>> implements AbstractNode , Comparable
 
     public D getData() {
         return data;
+    }
+
+
+    public void insert(D data) {
+        var node = new Node<>(data);
+        if (this.isGreaterThan(node)) {
+            if (this.hasLeft()) {
+                left.insert(data);
+            } else {
+                left = node;
+            }
+        } else {
+            if (this.hasRight()) {
+                right.insert(data);
+            } else {
+                right = node;
+            }
+        }
+    }
+
+    public void traverseInOrder() {
+        if (this.isNil()) {
+            return;
+        }
+        left.traverseInOrder();
+        System.out.println(data);
+        right.traverseInOrder();
     }
 
     public Boolean isGreaterThan(Node<D> node) {
@@ -77,70 +104,26 @@ public class Node <D extends Comparable<D>> implements AbstractNode , Comparable
 
     @Override
     public Boolean isNil() {
-        return false;
+        return this.data == null;
     }
 
     @Override
     public int compareTo(Node<D> o) {
-        if (o == null) return 1;
+        if (o == null || o.isNil()) return 1;
+        if (this.isNil()) return -1;
         return this.data.compareTo(o.data);
     }
 
 
     public static class NilNode<D extends Comparable<D>> extends Node<D> {
+        public final static Node<?> NIL = new NilNode<>();
+
         public NilNode() {
             super(null);
         }
 
-        public static <D extends Comparable<D>> NilNode<D> of() {
-            return new NilNode<>();
-        }
-
-        @Override
-        public Boolean isLeaf() {
-            return false;
-        }
-
-        @Override
-        public Boolean hasLeft() {
-            return false;
-        }
-
-        @Override
-        public Boolean hasRight() {
-            return false;
-        }
-
-        @Override
-        public Boolean isNil() {
-            return true;
-        }
-
-        @Override
-        public Node<D> getLeft() {
-            throw new UnsupportedOperationException("Cannot get left on NilNode");
-        }
-
-        @Override
-        public Node<D> getRight() {
-            throw new UnsupportedOperationException("Cannot get right on NilNode");
-        }
-
-        @Override
-        public void setLeft(Node<D> left) {
-            throw new UnsupportedOperationException("Cannot set left on NilNode");
-        }
-
-        @Override
-        public void setRight(Node<D> right) {
-            throw new UnsupportedOperationException("Cannot set right on NilNode");
-        }
-
-        @Override
-        public int compareTo(Node<D> o) {
-            if (o == null) return 1;
-            if (o.isNil()) return 0;
-            return -1;
+        public static <D extends Comparable<D>> Node<D> of() {
+            return (Node<D>) NIL;
         }
     }
 }
