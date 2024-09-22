@@ -2,7 +2,7 @@ package com.intelliacademy.ga.cp1;
 
 import com.intelliacademy.ga.Vertex;
 
-public class AdjacencyMatrixRepresentation {
+public class AdjacencyMatrixRepresentation_1 {
     public static void main(String[] args) {
         var vertexes = new Vertex[]{Vertex.of("A"), Vertex.of("B"), Vertex.of("C"), Vertex.of("D"), Vertex.of("E")};
 
