@@ -79,10 +79,7 @@ public final class Vertex {
 
     @Override
     public String toString() {
-        return "Vertex[" +
-                "name=" + name + ", " +
-                "visited=" + visited + ", " +
-                "adjacentVertices=" + adjacentVertices + ']';
+        return "Vertex[" + "name=" + name + "]";
     }
 
 }

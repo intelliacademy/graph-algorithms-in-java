@@ -35,6 +35,11 @@ public class BreadthFirstSearch {
     private void addVertex(Vertex vertex) {
         System.out.println(vertex.name() + " added to the queue");
         queue.add(vertex);
+        this.showQueue();
+    }
+
+    public void showQueue() {
+        System.out.println("Queue: " + queue);
     }
 
 
@@ -44,6 +49,7 @@ public class BreadthFirstSearch {
         }
         var vertex = queue.poll();
         System.out.println(vertex.name() + " removed from the queue");
+        this.showQueue();
         return Optional.of(vertex);
     }
 

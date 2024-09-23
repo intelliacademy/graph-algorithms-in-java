@@ -39,6 +39,9 @@ public class BreadthFirstSearch_Overview {
         vertexG.addAdjacentVertex(vertexJ);
         vertexG.addAdjacentVertex(vertexK);
 
+        vertexH.addAdjacentVertex(vertexL);
+        vertexL.addAdjacentVertex(vertexK);
+
 
         BreadthFirstSearch breadthFirstSearch = new BreadthFirstSearch(rootVertex);
 
