@@ -1,6 +1,6 @@
 package com.intelliacademy.ga.cp1;
 
-import com.intelliacademy.ga.Vertex;
+import com.intelliacademy.ga.util.Vertex;
 
 public class AdjacencyMatrixRepresentation_2 {
     public static void main(String[] args) {
