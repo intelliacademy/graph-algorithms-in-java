@@ -1,6 +1,7 @@
 package com.intelliacademy.ga.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -53,11 +54,11 @@ public final class RecVertex {
         return !adjacentVertices.isEmpty();
     }
 
-    public void addAdjacentVertex(RecVertex vertex) {
+    public void addAdjacentVertex(RecVertex... vertex) {
         if (vertex == null) {
             throw new IllegalArgumentException("Vertex cannot be null");
         }
-        adjacentVertices.add(vertex);
+        adjacentVertices.addAll(Arrays.stream(vertex).toList());
     }
 
     public void showAdjacentVertices() {

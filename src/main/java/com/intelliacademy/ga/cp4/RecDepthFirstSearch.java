@@ -13,6 +13,8 @@ public class RecDepthFirstSearch {
     }
 
     public void traversal(){
+        vertex.visit();
+        System.out.println("Visited [" + vertex.name() + "]");
         vertex.visitNext();
     }
 }
