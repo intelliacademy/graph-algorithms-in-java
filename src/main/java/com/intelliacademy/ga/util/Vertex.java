@@ -27,6 +27,10 @@ public final class Vertex {
         return this;
     }
 
+    public List<Vertex> unvisitedAdjacent(){
+        return this.adjacentVertices.stream().filter(vertex->!vertex.visited).toList();
+    }
+
     public Boolean hasUnvisitedAdjacentVertex() {
         return adjacentVertices.stream().anyMatch(vertex -> !vertex.visited());
     }
