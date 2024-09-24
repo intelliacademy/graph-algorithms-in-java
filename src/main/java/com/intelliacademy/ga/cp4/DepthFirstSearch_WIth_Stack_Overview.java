@@ -2,9 +2,7 @@ package com.intelliacademy.ga.cp4;
 
 import com.intelliacademy.ga.util.Vertex;
 
-import java.util.Stack;
-
-public class DepthFirstSearch_Overview {
+public class DepthFirstSearch_WIth_Stack_Overview {
     public static void main(String[] args) {
         Vertex rootVertex = Vertex.of("A");
         Vertex vertexB = Vertex.of("B");
