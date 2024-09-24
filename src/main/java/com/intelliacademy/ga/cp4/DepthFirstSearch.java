@@ -14,14 +14,13 @@ public class DepthFirstSearch {
     }
 
     public void traversal(){
+        System.out.println("Root is already visited [" + stack.peek() + "]");
         while (!stack.isEmpty()){
             Vertex actual = this.stack.pop();
-            for (Vertex ver: actual.adjacentVertices()){
-                if (!ver.visited()){
-                    ver.visit();
-                    this.stack.push(ver);
-                    System.out.println("Visited [" + ver.name() + "]");
-                }
+            for (Vertex ver: actual.unvisitedAdjacent()){
+                ver.visit();
+                this.stack.push(ver);
+                System.out.println("Visited [" + ver.name() + "]");
             }
         }
     }
