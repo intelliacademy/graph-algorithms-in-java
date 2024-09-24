@@ -30,9 +30,11 @@ public final class RecVertex {
     public void visitNext(){
         while (this.hasUnvisitedAdjacentVertex()){
             for (RecVertex vertex : this.unvisitedAdjacent()){
-                vertex.visit();
-                System.out.println("Visited [" + vertex.name + "]");
-                vertex.visitNext();
+                if (!vertex.visited()){
+                    vertex.visit();
+                    System.out.println("Visited [" + vertex.name + "]");
+                    vertex.visitNext();
+                }
             }
         }
     }
