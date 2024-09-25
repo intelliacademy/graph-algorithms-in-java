@@ -17,7 +17,6 @@ public class ShortestPath {
 
     public void compute() {
         var ordering = topologicalOrdering.getTopologicalOrder();
-
         while (!ordering.isEmpty()) {
             Vertex u = ordering.pop();
             for (Edge edge : u.getEdges()) {

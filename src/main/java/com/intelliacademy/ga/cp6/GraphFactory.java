@@ -29,4 +29,34 @@ public class GraphFactory {
 
         return List.of(vertexA, vertexB, vertexC, vertexD, vertexE, vertexS, vertexT);
     }
+
+
+    public static List<Vertex> createGraph2() {
+        var vertexS = Vertex.of("S");
+        var vertexA = Vertex.of("A");
+        var vertexB = Vertex.of("B");
+        var vertexC = Vertex.of("C");
+        var vertexD = Vertex.of("D");
+        var vertexE = Vertex.of("E");
+
+
+        vertexS.addAdjacentVertex(vertexA,1);
+        vertexS.addAdjacentVertex(vertexC,2);
+
+        vertexA.addAdjacentVertex(vertexB,6);
+
+        vertexB.addAdjacentVertex(vertexE,1);
+        vertexB.addAdjacentVertex(vertexD,2);
+
+        vertexC.addAdjacentVertex(vertexA,4);
+        vertexC.addAdjacentVertex(vertexD,3);
+
+        vertexD.addAdjacentVertex(vertexE,1);
+
+
+        return List.of(vertexS,vertexA, vertexB, vertexC, vertexD, vertexE);
+    }
+
+
+
 }

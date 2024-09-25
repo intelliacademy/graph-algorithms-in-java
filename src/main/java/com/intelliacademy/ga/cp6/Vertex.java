@@ -24,7 +24,7 @@ public class Vertex {
         return new Vertex(name);
     }
 
-    public void addAdjacentVertex(Vertex vertex, int weight) {
+    public void addAdjacentVertex(Vertex vertex, Integer weight) {
         this.edges.add(new Edge(vertex, weight));
     }
 
