@@ -6,12 +6,14 @@ import java.util.Stack;
 public class TopologicalOrdering {
     private final Stack<Vertex> stack = new Stack<>();
 
-    public TopologicalOrdering(List<Vertex> graph) {
+    public static TopologicalOrdering of(List<Vertex> graph) {
+        var topologicalOrdering =  new TopologicalOrdering();
         for (Vertex vertex : graph) {
             if (!vertex.getVisited()) {
-                dfs(vertex);
+                topologicalOrdering.dfs(vertex);
             }
         }
+        return topologicalOrdering;
     }
 
 
