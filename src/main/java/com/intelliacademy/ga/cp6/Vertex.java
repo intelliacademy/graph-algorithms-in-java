@@ -53,11 +53,16 @@ public class Vertex {
         return predecessor;
     }
 
+    public void setMinDistance(Integer minDistance) {
+        this.minDistance = minDistance;
+    }
+
     @Override
     public String toString() {
-        return "Vertex{" +
-                "name='" + name + '\'' +
-                ", predecessor=" + predecessor +
-                "}\n";
+        return "V[" + name + "]";
+    }
+
+    public void setPredecessor(Vertex u) {
+        this.predecessor = u;
     }
 }
