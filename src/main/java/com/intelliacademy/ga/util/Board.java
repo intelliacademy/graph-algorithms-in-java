@@ -1,12 +1,14 @@
 package com.intelliacademy.ga.util;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Stack;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Board {
+
+
+    public record Point(Integer row, Integer column) { }
+
     private final Stack<Cell> stack = new Stack<>();
     private final Integer rows;
     private final Integer columns;
@@ -19,7 +21,11 @@ public class Board {
         this.initializeBoard();
     }
 
-    public Cell getCell(Integer row, Integer column) {
+    public Cell cell(Point point) {
+        return this.cell(point.row(), point.column());
+    }
+
+    public Cell cell(Integer row, Integer column) {
         if (row < 0 || row >= this.rows || column < 0 || column >= this.columns) {
             return null;
         }
@@ -41,73 +47,93 @@ public class Board {
     private void initializeBoard() {
         for (int i = 0; i < this.rows; i++) {
             for (int j = 0; j < this.columns; j++) {
-                this.board[i][j] = new Cell(this,i, j, "O");
+                this.board[i][j] = new Cell(this,i, j, "#");
             }
         }
     }
 
 
-    public Cell run(Point startPoint,Point targetPoint) {
-        Cell current = this.getCell(startPoint.row(), startPoint.column());
-        current.visit();
-        this.stack.push(current);
+    public void run(Point startPoint,Point targetPoint) {
+        var startCell = this.cell(startPoint);
+
+        startCell.visit();
+        this.stack.push(startCell);
 
         while (!this.stack.isEmpty()) {
-            Cell top = this.stack.peek();
-            List<Cell> neighbors = top.getAvailableUnvisitedNeighbors();
-            if (neighbors.isEmpty()) {
-                this.stack.pop();
+            var neighbor = this.stack.peek().getAvailableUnvisitedNeighbors();
+            if (neighbor.isEmpty()) {
+                var cell = this.stack.pop();
+                cell.unAvailable();
             } else {
-                Cell next = neighbors.get(0);
-                next.visit();
-                this.stack.push(next);
+                var nextCell = neighbor.poll();
+                assert nextCell != null;
+                if (nextCell.isArrived(targetPoint)) {
+                    nextCell.destination();
+                    break;
+                }
+                nextCell.visit();
+                this.stack.push(nextCell);
+                neighbor.forEach(Cell::viewed);
             }
         }
-        return current;
+
+
     }
 
 }
 
 
-class Cell {
+class Cell implements Comparable<Cell> {
     private Board board;
-    private final Integer row;
-    private final Integer column;
+    private final Board.Point point;
     private String value;
     private Boolean visited = false;
     private Boolean available = true;
+    private Boolean viewed = false;
+    private Integer priority = 10;
 
     public Cell(Board board,Integer row, Integer column, String value) {
         this.board = board;
-        this.row = row;
-        this.column = column;
+        this.point = new Board.Point(row, column);
         this.value = value;
     }
 
+    public Board.Point getPoint() {
+        return point;
+    }
+
     public Cell down() {
-        return this.board.getCell(this.row + 1, this.column);
+        return this.board.cell(this.point.row() + 1, this.point.column() );
     }
 
     public Cell up() {
-        return this.board.getCell(this.row - 1, this.column);
+        return this.board.cell(this.point.row()  - 1, this.point.column());
     }
 
     public Cell left() {
-        return this.board.getCell(this.row, this.column - 1);
+        return this.board.cell(this.point.row() , this.point.column() - 1);
     }
 
     public Cell right() {
-        return this.board.getCell(this.row, this.column + 1);
+        return this.board.cell(this.point.row() , this.point.column() + 1);
     }
 
-    public List<Cell> getAvailableUnvisitedNeighbors() {
+    public Cell viewed() {
+        this.viewed = true;
+        this.priority = 5;
+        return this;
+    }
+
+    public Queue<Cell> getAvailableUnvisitedNeighbors() {
         return Stream.of(this.up(), this.down(), this.left(), this.right())
                 .filter(Objects::nonNull)
-                .toList();
+                .filter(Cell::isAvailable)
+                .filter(cell -> !cell.visited)
+                .collect(Collectors.toCollection(PriorityQueue::new));
     }
 
-    public Boolean isArrived(Point targetPoint) {
-        return this.row.equals(targetPoint.row()) && this.column.equals(targetPoint.column());
+    public Boolean isArrived(Board.Point targetPoint) {
+        return this.point.row().equals(targetPoint.row()) && this.point.column().equals(targetPoint.column());
     }
 
     public void destination() {
@@ -116,12 +142,14 @@ class Cell {
 
     public void wall() {
         this.available = false;
+        this.priority = 0;
         this.value = "W";
     }
 
     public void unAvailable() {
         this.available = false;
         this.value = "X";
+        this.priority = 0;
         this.visited = true;
     }
 
@@ -129,8 +157,12 @@ class Cell {
         return this.available;
     }
 
-    public void visit() {
+    public Cell visit() {
         this.visited = true;
+        this.value = "V";
+        this.priority = 1;
+        //System.out.println("Visiting cell: " + this + " point: " + this.point);
+        return this;
     }
 
     @Override
@@ -143,14 +175,16 @@ class Cell {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cell cell = (Cell) o;
-        return Objects.equals(row, cell.row) && Objects.equals(column, cell.column);
+        return Objects.equals(point.row(), cell.point.row()) && Objects.equals(point.column(), cell.point.column());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(row, column);
+        return Objects.hash(point.row(), point.column());
+    }
+
+    @Override
+    public int compareTo(Cell o) {
+        return o.priority.compareTo(this.priority);
     }
 }
-
-
-record Point(Integer row, Integer column) { }
