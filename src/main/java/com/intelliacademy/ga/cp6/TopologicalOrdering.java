@@ -20,7 +20,7 @@ public class TopologicalOrdering {
         for (Edge edge : vertex.getEdges()) {
             Vertex neighbour = edge.target();
             if (!neighbour.getVisited()) {
-                dfs(neighbour);
+                this.dfs(neighbour);
             }
         }
         stack.push(vertex);

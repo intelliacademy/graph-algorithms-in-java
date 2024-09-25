@@ -10,6 +10,7 @@ public class GraphFactory {
         var vertexD = Vertex.of("D");
         var vertexE = Vertex.of("E");
         var vertexS = Vertex.of("S");
+        var vertexT = Vertex.of("T");
 
         vertexA.addAdjacentVertex(vertexB,6);
 
@@ -19,11 +20,13 @@ public class GraphFactory {
         vertexC.addAdjacentVertex(vertexA,4);
         vertexC.addAdjacentVertex(vertexD,3);
 
-        vertexD.addAdjacentVertex(vertexE,1);
+        vertexD.addAdjacentVertex(vertexT,1);
+
+        vertexE.addAdjacentVertex(vertexT,7);
 
         vertexS.addAdjacentVertex(vertexA,1);
         vertexS.addAdjacentVertex(vertexC,2);
 
-        return List.of(vertexA, vertexB, vertexC, vertexD, vertexE, vertexS);
+        return List.of(vertexA, vertexB, vertexC, vertexD, vertexE, vertexS, vertexT);
     }
 }
