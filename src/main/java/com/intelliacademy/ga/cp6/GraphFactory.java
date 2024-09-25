@@ -27,7 +27,7 @@ public class GraphFactory {
         vertexS.addAdjacentVertex(vertexA,1);
         vertexS.addAdjacentVertex(vertexC,2);
 
-        return List.of(vertexA, vertexB, vertexC, vertexD, vertexE, vertexS, vertexT);
+        return List.of(vertexS,vertexA, vertexB, vertexC, vertexD, vertexE, vertexT);
     }
 
 
