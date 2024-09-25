@@ -1,18 +1,18 @@
 package com.intelliacademy.ga.cp2;
 
-import com.intelliacademy.ga.util.Vertex;
+import com.intelliacademy.ga.util.SimpleVertex;
 
 import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Queue;
 
 public class BreadthFirstSearch {
-    private final Vertex rootVertex;
+    private final SimpleVertex rootVertex;
 
-    private final Queue<Vertex> queue = new LinkedList<>();
+    private final Queue<SimpleVertex> queue = new LinkedList<>();
 
 
-    public BreadthFirstSearch(Vertex rootVertex) {
+    public BreadthFirstSearch(SimpleVertex rootVertex) {
         this.rootVertex = rootVertex;
     }
 
@@ -23,7 +23,7 @@ public class BreadthFirstSearch {
             var currentVertex = removeVertex();
 
             if (currentVertex.isPresent()) {
-                for (Vertex vertex : currentVertex.get().adjacentVertices()) {
+                for (SimpleVertex vertex : currentVertex.get().adjacentVertices()) {
                     if (!vertex.visited()) {
                         addVertex(vertex.visit());
                     }
@@ -32,7 +32,7 @@ public class BreadthFirstSearch {
         }
     }
 
-    private void addVertex(Vertex vertex) {
+    private void addVertex(SimpleVertex vertex) {
         System.out.println(vertex.name() + " added to the queue");
         queue.add(vertex);
         this.showQueue();
@@ -43,7 +43,7 @@ public class BreadthFirstSearch {
     }
 
 
-    private Optional<Vertex> removeVertex() {
+    private Optional<SimpleVertex> removeVertex() {
         if (queue.isEmpty()) {
             return Optional.empty();
         }

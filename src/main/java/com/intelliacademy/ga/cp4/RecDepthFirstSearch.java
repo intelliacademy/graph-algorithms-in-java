@@ -1,9 +1,6 @@
 package com.intelliacademy.ga.cp4;
 
 import com.intelliacademy.ga.util.RecVertex;
-import com.intelliacademy.ga.util.Vertex;
-
-import java.util.Stack;
 
 public class RecDepthFirstSearch {
     private final RecVertex vertex;

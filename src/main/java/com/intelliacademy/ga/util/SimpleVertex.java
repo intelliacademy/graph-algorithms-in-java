@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public final class Vertex {
+public final class SimpleVertex {
     private final String name;
     private Boolean visited;
-    private final List<Vertex> adjacentVertices;
+    private final List<SimpleVertex> adjacentVertices;
 
-    public Vertex(String name, Boolean visited, List<Vertex> adjacentVertices) {
+    public SimpleVertex(String name, Boolean visited, List<SimpleVertex> adjacentVertices) {
         if (name == null) {
             throw new IllegalArgumentException("Vertex name cannot be null");
         }
@@ -18,16 +18,16 @@ public final class Vertex {
         this.adjacentVertices = adjacentVertices;
     }
 
-    public static Vertex of(String name) {
-        return new Vertex(name, false, new ArrayList<>());
+    public static SimpleVertex of(String name) {
+        return new SimpleVertex(name, false, new ArrayList<>());
     }
 
-    public Vertex visit() {
+    public SimpleVertex visit() {
         visited = true;
         return this;
     }
 
-    public List<Vertex> unvisitedAdjacent(){
+    public List<SimpleVertex> unvisitedAdjacent(){
         return this.adjacentVertices.stream().filter(vertex->!vertex.visited).toList();
     }
 
@@ -39,7 +39,7 @@ public final class Vertex {
         return !adjacentVertices.isEmpty();
     }
 
-    public void addAdjacentVertex(Vertex vertex) {
+    public void addAdjacentVertex(SimpleVertex vertex) {
         if (vertex == null) {
             throw new IllegalArgumentException("Vertex cannot be null");
         }
@@ -48,7 +48,7 @@ public final class Vertex {
 
     public void showAdjacentVertices() {
         System.out.print(name + " -> ");
-        for (Vertex vertex : adjacentVertices) {
+        for (SimpleVertex vertex : adjacentVertices) {
             System.out.print(vertex.name() + " " + vertex.visited() + ", ");
         }
         System.out.println();
@@ -62,7 +62,7 @@ public final class Vertex {
         return visited;
     }
 
-    public List<Vertex> adjacentVertices() {
+    public List<SimpleVertex> adjacentVertices() {
         return adjacentVertices;
     }
 
@@ -70,7 +70,7 @@ public final class Vertex {
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (Vertex) obj;
+        var that = (SimpleVertex) obj;
         return Objects.equals(this.name, that.name) &&
                 Objects.equals(this.visited, that.visited) &&
                 Objects.equals(this.adjacentVertices, that.adjacentVertices);

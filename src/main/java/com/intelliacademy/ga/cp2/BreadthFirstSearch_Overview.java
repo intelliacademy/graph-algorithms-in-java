@@ -1,23 +1,21 @@
 package com.intelliacademy.ga.cp2;
 
-import com.intelliacademy.ga.util.Tree;
-import com.intelliacademy.ga.util.TreeUtil;
-import com.intelliacademy.ga.util.Vertex;
+import com.intelliacademy.ga.util.SimpleVertex;
 
 public class BreadthFirstSearch_Overview {
     public static void main(String[] args) {
-        Vertex rootVertex = Vertex.of("A");
-        Vertex vertexB = Vertex.of("B");
-        Vertex vertexC = Vertex.of("C");
-        Vertex vertexD = Vertex.of("D");
-        Vertex vertexE = Vertex.of("E");
-        Vertex vertexF = Vertex.of("F");
-        Vertex vertexG = Vertex.of("G");
-        Vertex vertexH = Vertex.of("H");
-        Vertex vertexI = Vertex.of("I");
-        Vertex vertexJ = Vertex.of("J");
-        Vertex vertexK = Vertex.of("K");
-        Vertex vertexL = Vertex.of("L");
+        SimpleVertex rootVertex = SimpleVertex.of("A");
+        SimpleVertex vertexB = SimpleVertex.of("B");
+        SimpleVertex vertexC = SimpleVertex.of("C");
+        SimpleVertex vertexD = SimpleVertex.of("D");
+        SimpleVertex vertexE = SimpleVertex.of("E");
+        SimpleVertex vertexF = SimpleVertex.of("F");
+        SimpleVertex vertexG = SimpleVertex.of("G");
+        SimpleVertex vertexH = SimpleVertex.of("H");
+        SimpleVertex vertexI = SimpleVertex.of("I");
+        SimpleVertex vertexJ = SimpleVertex.of("J");
+        SimpleVertex vertexK = SimpleVertex.of("K");
+        SimpleVertex vertexL = SimpleVertex.of("L");
 
         rootVertex.addAdjacentVertex(vertexB);
         rootVertex.addAdjacentVertex(vertexC);

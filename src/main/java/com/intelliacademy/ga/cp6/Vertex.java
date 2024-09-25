@@ -1,0 +1,63 @@
+package com.intelliacademy.ga.cp6;
+
+import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Vertex {
+    private final String name;
+    private final List<Edge> edges;
+    private Boolean visited;
+    private Vertex predecessor;
+    private Integer minDistance;
+
+    public Vertex(String name) {
+        this.name = name;
+        this.edges = new ArrayList<>();
+        this.visited = false;
+        this.predecessor = null;
+        this.minDistance = Integer.MAX_VALUE;
+    }
+
+    public static Vertex of(String name) {
+        return new Vertex(name);
+    }
+
+    public void addAdjacentVertex(Vertex vertex, int weight) {
+        this.edges.add(new Edge(vertex, weight));
+    }
+
+    public void visit() {
+        System.out.println("Visiting vertex: " + this.name);
+        this.visited = true;
+    }
+
+    public Boolean getVisited() {
+        return visited;
+    }
+
+    public Integer getMinDistance() {
+        return minDistance;
+    }
+
+    public List<Edge> getEdges() {
+        return edges;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Vertex getPredecessor() {
+        return predecessor;
+    }
+
+    @Override
+    public String toString() {
+        return "Vertex{" +
+                "name='" + name + '\'' +
+                ", predecessor=" + predecessor +
+                "}\n";
+    }
+}

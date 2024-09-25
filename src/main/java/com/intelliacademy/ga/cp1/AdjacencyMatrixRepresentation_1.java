@@ -1,10 +1,10 @@
 package com.intelliacademy.ga.cp1;
 
-import com.intelliacademy.ga.util.Vertex;
+import com.intelliacademy.ga.util.SimpleVertex;
 
 public class AdjacencyMatrixRepresentation_1 {
     public static void main(String[] args) {
-        var vertexes = new Vertex[]{Vertex.of("A"), Vertex.of("B"), Vertex.of("C"), Vertex.of("D"), Vertex.of("E")};
+        var vertexes = new SimpleVertex[]{SimpleVertex.of("A"), SimpleVertex.of("B"), SimpleVertex.of("C"), SimpleVertex.of("D"), SimpleVertex.of("E")};
 
         var adjacencyList = new Integer[][]{
                 {0,2,3,0,4},// A
