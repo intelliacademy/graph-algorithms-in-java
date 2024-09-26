@@ -6,29 +6,27 @@ import java.util.List;
 public class GVertex {
     private final String name;
     private boolean visited;
-    private boolean beingVisited;
-    private Integer minDistance;
-    private GVertex processor;
+    private Integer distance;
+    private GVertex predecessor;
     private final List<GEdge> edges;
 
     public GVertex(String name) {
         this.name = name;
         this.edges = new ArrayList<>();
         this.visited = false;
-        this.beingVisited = false;
-        this.minDistance = Integer.MAX_VALUE;
+        this.distance = Integer.MAX_VALUE;
     }
 
-    public void setProcessor(GVertex processor) {
-        this.processor = processor;
+    public void setPredecessor(GVertex predecessor) {
+        this.predecessor = predecessor;
     }
 
-    public Integer getMinDistance() {
-        return minDistance;
+    public Integer getDistance() {
+        return distance;
     }
 
     public void zeroDistance() {
-        this.minDistance = 0;
+        this.distance = 0;
     }
 
     public void addEdge(GEdge edge) {
@@ -36,7 +34,7 @@ public class GVertex {
     }
 
     public void addEdge(GVertex target, int weight) {
-        this.addEdge(new GEdge(target, weight));
+        this.addEdge(new GEdge(this, target, weight));
     }
 
     public List<GEdge> getEdges() {
@@ -49,18 +47,6 @@ public class GVertex {
 
     public void visit() {
         this.visited = true;
-    }
-
-    public Boolean isBeingVisited() {
-        return beingVisited;
-    }
-
-    public void beingVisit() {
-        this.beingVisited = true;
-    }
-
-    public void beingUnVisit() {
-        this.beingVisited = false;
     }
 
     @Override
