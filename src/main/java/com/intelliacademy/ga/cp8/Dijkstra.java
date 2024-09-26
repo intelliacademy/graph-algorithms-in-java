@@ -38,7 +38,6 @@ public class Dijkstra<D> {
             System.out.println(vertex + " " + vertex.getDistance());
             path.add(vertex);
         }
-        Collections.reverse(path);
         return path;
     }
 
