@@ -37,9 +37,7 @@ public class CVertex {
     }
 
     public void visit(){
-        System.out.println("Visiting vertex: " + this.name);
         this.visited = true;
-        this.beingVisited = true;
     }
 
     public void addAdjacentVertex(CVertex ... vertex) {

@@ -13,23 +13,18 @@ public class CycleDetection {
     }
 
     private void dfs(CVertex vertex) {
-        System.out.println("DFS on vertex: " + vertex);
         vertex.setBeingVisited(true);
 
         for (CVertex v : vertex.getAdjacentVertices()) {
-            System.out.println("Visiting the neighbors of vertex: " + v);
             if (v.isBeingVisited()) {
-                System.out.println("Cycle detected");
+                System.out.println("Cycle detected" + v);
                 return;
             }
-
             if (!v.visited()) {
                 v.visit();
                 this.dfs(v);
             }
         }
-
         vertex.setBeingVisited(false);
-        vertex.visit();
     }
 }

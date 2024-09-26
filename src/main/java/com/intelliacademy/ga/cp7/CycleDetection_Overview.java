@@ -18,9 +18,9 @@ public class CycleDetection_Overview {
         var vertexF = CVertex.of("F");
 
         vertexA.addAdjacentVertex(vertexC,vertexE);
-        vertexC.addAdjacentVertex(vertexB,vertexF);
-        vertexD.addAdjacentVertex(vertexA);
-        vertexE.addAdjacentVertex(vertexD);
+        vertexC.addAdjacentVertex(vertexB,vertexD);
+        vertexF.addAdjacentVertex(vertexA);
+        vertexE.addAdjacentVertex(vertexF);
         return List.of(vertexA,vertexB,vertexC,vertexD,vertexE,vertexF);
     }
 }
