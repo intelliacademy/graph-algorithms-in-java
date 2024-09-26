@@ -35,7 +35,7 @@ public class Dijkstra<D> {
     public List<GVertex<D>> getShortestPath(GVertex<D> target){
         var path = new ArrayList<GVertex<D>>();
         for (GVertex<D> vertex = target; vertex != null; vertex = vertex.getPredecessor()){
-            System.out.println(vertex);
+            System.out.println(vertex + " " + vertex.getDistance());
             path.add(vertex);
         }
         Collections.reverse(path);
