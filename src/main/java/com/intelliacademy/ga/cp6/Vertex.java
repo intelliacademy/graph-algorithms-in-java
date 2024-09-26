@@ -3,6 +3,7 @@ package com.intelliacademy.ga.cp6;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Vertex {
@@ -26,6 +27,14 @@ public class Vertex {
 
     public void addAdjacentVertex(Vertex vertex, Integer weight) {
         this.edges.add(new Edge(vertex, weight));
+    }
+
+    public void addAdjacentVertex(Vertex vertex) {
+        this.addAdjacentVertex(vertex,1);
+    }
+
+    public void addAdjacentVertex(Vertex ... vertex) {
+        Arrays.stream(vertex).forEach(this::addAdjacentVertex);
     }
 
     public void visit() {
