@@ -7,6 +7,8 @@ public class GVertex {
     private final String name;
     private boolean visited;
     private boolean beingVisited;
+    private Integer minDistance;
+    private GVertex processor;
     private final List<GEdge> edges;
 
     public GVertex(String name) {
@@ -14,6 +16,19 @@ public class GVertex {
         this.edges = new ArrayList<>();
         this.visited = false;
         this.beingVisited = false;
+        this.minDistance = Integer.MAX_VALUE;
+    }
+
+    public void setProcessor(GVertex processor) {
+        this.processor = processor;
+    }
+
+    public Integer getMinDistance() {
+        return minDistance;
+    }
+
+    public void zeroDistance() {
+        this.minDistance = 0;
     }
 
     public void addEdge(GEdge edge) {
