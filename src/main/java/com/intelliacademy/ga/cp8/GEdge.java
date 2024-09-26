@@ -1,6 +1,6 @@
 package com.intelliacademy.ga.cp8;
 
-public record GEdge(GVertex source,GVertex target, int weight) {
+public record GEdge<D>(GVertex<D> source,GVertex<D> target, int weight) {
     public GEdge{
         if (weight < 0) {
             throw new IllegalArgumentException("Weight cannot be negative");

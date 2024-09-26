@@ -3,21 +3,21 @@ package com.intelliacademy.ga.cp8;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GVertex {
-    private final String name;
+public class GVertex<D> implements Comparable<GVertex<D>> {
+    private final D data;
     private boolean visited;
     private Integer distance;
-    private GVertex predecessor;
-    private final List<GEdge> edges;
+    private GVertex<D> predecessor;
+    private final List<GEdge<D>> edges;
 
-    public GVertex(String name) {
-        this.name = name;
+    public GVertex(D data) {
+        this.data = data;
         this.edges = new ArrayList<>();
         this.visited = false;
         this.distance = Integer.MAX_VALUE;
     }
 
-    public void setPredecessor(GVertex predecessor) {
+    public void setPredecessor(GVertex<D> predecessor) {
         this.predecessor = predecessor;
     }
 
@@ -29,15 +29,20 @@ public class GVertex {
         this.distance = 0;
     }
 
-    public void addEdge(GEdge edge) {
+    public GVertex<D> maxDistance() {
+        this.distance = Integer.MAX_VALUE;
+        return this;
+    }
+
+    public void addEdge(GEdge<D> edge) {
         this.edges.add(edge);
     }
 
-    public void addEdge(GVertex target, int weight) {
-        this.addEdge(new GEdge(this, target, weight));
+    public void addEdge(GVertex<D> target, int weight) {
+        this.addEdge(new GEdge<D>(this, target, weight));
     }
 
-    public List<GEdge> getEdges() {
+    public List<GEdge<D>> getEdges() {
         return edges;
     }
 
@@ -51,6 +56,19 @@ public class GVertex {
 
     @Override
     public String toString() {
-        return " [" + name + "]";
+        return " [" + data + "]";
+    }
+
+    @Override
+    public int compareTo(GVertex o) {
+        return this.distance.compareTo(o.distance);
+    }
+
+    public void setDistance(Integer distance) {
+        this.distance = distance;
+    }
+
+    public GVertex<D> getPredecessor() {
+        return predecessor;
     }
 }

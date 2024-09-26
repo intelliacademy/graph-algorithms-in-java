@@ -2,33 +2,40 @@ package com.intelliacademy.ga.cp8;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class Graph {
-    private List<GVertex> vertices;
+public class Graph <D>{
+    private GVertex<D> startVertex;
+    private List<GVertex<D>> vertices;
 
-    private Graph(List<GVertex> vertices) {
-        this.vertices = vertices;
+    private Graph(GVertex<D> vA, List<GVertex<D>> vertices) {
+        this.vertices = vertices.stream().map(GVertex::maxDistance).collect(Collectors.toCollection(ArrayList::new));
+        this.startVertex = vA;
+        this.startVertex.zeroDistance();
     }
 
-    public static Graph of(List<GVertex> vertices) {
-        return new Graph(vertices);
+    public static <D> Graph<D> of(GVertex<D> start, List<GVertex<D>> vertices) {
+        return new Graph<D>(start,vertices);
     }
 
-    public List<GVertex> getVertices() {
+    public List<GVertex<D>> getVertices() {
         return vertices;
     }
 
+    public GVertex<D> getStartVertex() {
+        return startVertex;
+    }
 
     public static class Factory{
-        public static Graph random() {
-            var vA = new GVertex("A");
-            var vB = new GVertex("B");
-            var vC = new GVertex("C");
-            var vD = new GVertex("D");
-            var vE = new GVertex("E");
-            var vF = new GVertex("F");
-            var vG = new GVertex("G");
-            var vH = new GVertex("H");
+        public static  Graph<String> random() {
+            var vA = new GVertex<>("A");
+            var vB = new GVertex<>("B");
+            var vC = new GVertex<>("C");
+            var vD = new GVertex<>("D");
+            var vE = new GVertex<>("E");
+            var vF = new GVertex<>("F");
+            var vG = new GVertex<>("G");
+            var vH = new GVertex<>("H");
 
             vA.addEdge(vB, 5);
             vA.addEdge(vH, 8);
@@ -55,7 +62,7 @@ public class Graph {
 
 
             var vertices = List.of(vA, vB, vC, vD, vE, vF, vG, vH);
-            return Graph.of(vertices);
+            return new Graph<>(vA, vertices);
         }
     }
 }
