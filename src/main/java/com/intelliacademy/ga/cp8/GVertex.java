@@ -17,6 +17,8 @@ public class GVertex<D> implements Comparable<GVertex<D>> {
         this.distance = Integer.MAX_VALUE;
     }
 
+
+
     public void setPredecessor(GVertex<D> predecessor) {
         this.predecessor = predecessor;
     }
